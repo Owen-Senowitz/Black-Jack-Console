@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace Black_Jack
 {
@@ -8,10 +9,11 @@ namespace Black_Jack
         {
             Deck deck1 = new Deck();
             deck1.Shuffle();
-            for (int i = 0; i < 52; i++)
-            {
-                Console.WriteLine(deck1.DealCard());
-            }
+            deck1.printDeck();
+            Console.WriteLine("Dealing Card");
+            Thread.Sleep(500);
+            Console.WriteLine(deck1.DealCard());
+
             Console.ReadLine();
         }
     }

@@ -8,42 +8,51 @@ namespace Black_Jack
 {
     public class Deck
     {
-        private Card[] deck;
+        public List<Card> deck { get; set; }
         private int currentCard;
         private const int maxCards = 52;
         private Random ranNum;
 
         public Deck()
         {
-            deck = new Card[maxCards];
+            deck = new List<Card>();
             currentCard = 0;
-            ranNum = new Random();
 
             int x = 0;
             for (int i = 0; i < Enum.GetValues(typeof(SuitType)).Length; i++)
             {
                 for (int j = 0; j < Enum.GetValues(typeof(CardValueType)).Length; j++, x++)
                 {
-                    deck[x] = new Card((SuitType) i, (CardValueType) j);
-                    if (j == 13)
-                        break;
+                    var card = new Card((SuitType) i, (CardValueType) j);
+                    deck.Add(card);
                 }
             }
         }
+
+        public void printDeck()
+        {
+            foreach (var card in deck)
+            {
+                Console.WriteLine(card);
+            }
+        }
+
         public void Shuffle()
         {
-            currentCard = 0;
-            for (int i = 0; i < deck.Length; i++)
+            ranNum = new Random();
+            int n = deck.Count;
+            while (n > 1)
             {
-                int second = ranNum.Next(maxCards);
-                Card temp = deck[i];
-                deck[i] = deck[second];
-                deck[second] = temp;
+                n--;
+                int k = ranNum.Next(n + 1);
+                Card value = deck[k];
+                deck[k] = deck[n];
+                deck[n] = value;
             }
         }
         public Card DealCard()
         {
-            if (currentCard < deck.Length)
+            if (currentCard < deck.Count)
             {
                 return deck[currentCard++];
             }
