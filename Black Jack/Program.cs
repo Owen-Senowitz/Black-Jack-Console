@@ -8,7 +8,7 @@ namespace Black_Jack
         {
             Deck deck1 = new Deck();
             deck1.Shuffle();
-            for(int i = 0; i < 52; i++)
+            for (int i = 0; i < 52; i++)
             {
                 Console.WriteLine(deck1.DealCard());
             }

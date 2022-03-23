@@ -15,20 +15,25 @@ namespace Black_Jack
 
         public Deck()
         {
-            string[] faces = { "Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King" };
-            string[] suits = { "Hearts", "Clubs", "Diamonds", "Spades" };
             deck = new Card[maxCards];
             currentCard = 0;
             ranNum = new Random();
-            for(int i = 0; i < deck.Length; i++)
+
+            int x = 0;
+            for (int i = 0; i < Enum.GetValues(typeof(SuitType)).Length; i++)
             {
-                deck[i] = new Card(faces[i % 11], suits[i / 13]);
+                for (int j = 0; j < Enum.GetValues(typeof(CardValueType)).Length; j++, x++)
+                {
+                    deck[x] = new Card((SuitType) i, (CardValueType) j);
+                    if (j == 13)
+                        break;
+                }
             }
         }
         public void Shuffle()
         {
             currentCard = 0;
-            for(int i = 0; i < deck.Length; i++)
+            for (int i = 0; i < deck.Length; i++)
             {
                 int second = ranNum.Next(maxCards);
                 Card temp = deck[i];
@@ -38,7 +43,7 @@ namespace Black_Jack
         }
         public Card DealCard()
         {
-            if(currentCard < deck.Length)
+            if (currentCard < deck.Length)
             {
                 return deck[currentCard++];
             }
