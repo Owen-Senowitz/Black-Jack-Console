@@ -12,8 +12,8 @@ namespace Black_Jack
             deck1.printDeck();
             Console.WriteLine("Dealing Card");
             Thread.Sleep(500);
-            Console.WriteLine(deck1.DealCard());
-
+            Console.WriteLine(deck1.DealCard().Score);
+            
             Console.ReadLine();
         }
     }
